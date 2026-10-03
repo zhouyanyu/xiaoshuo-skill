@@ -1,0 +1,4 @@
+interface:
+  display_name: "小说阅读 Wiki"
+  short_description: "逐章梳理人物、场景与因果，持续维护小说阅读 Wiki，并探究文化背景"
+  default_prompt: "使用 $xiaoshuo 将我提供的小说整理为逐章回忆卡和阅读 Wiki，允许剧透，讲清人物、场景、因果并按需查证文化背景。"
