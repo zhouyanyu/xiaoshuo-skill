@@ -220,6 +220,25 @@ TXT、Markdown 容易直接读取；EPUB、PDF 等文件是否能提取文本取
 
 ## 更新已安装的 skill
 
+### Windows 已上传 SSH 密钥，但 Git 仍提示 publickey 错误
+
+Windows SSH 代理与 Git 自带的 SSH 客户端有时不会共用同一个代理。若 Windows 代理已经加载密钥，可以先指定 Windows 自带 SSH 测试：
+
+```powershell
+& "$env:WINDIR\System32\OpenSSH\ssh-add.exe" -l
+git -c core.sshCommand=C:/Windows/System32/OpenSSH/ssh.exe ls-remote git@github.com:zhouyanyu/xiaoshuo-skill.git
+```
+
+成功后，可仅对当前仓库配置，不影响全局设置（将路径换成你的 checkout）：
+
+```powershell
+git -C "你的checkout路径" config core.sshCommand C:/Windows/System32/OpenSSH/ssh.exe
+```
+
+如果 Windows 安装在其他盘符，应使用实际的 Windows SSH 路径。此办法适用于已有可用 Windows SSH 代理的情况，不能代替上传公钥或完成账号认证。
+
+### 拉取新版本
+
 如果安装目录是从本仓库克隆的，且没有尚未处理的本地修改：
 
 Windows PowerShell：

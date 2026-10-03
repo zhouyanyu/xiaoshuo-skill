@@ -11,6 +11,10 @@
 
 SSH 不可用时，可使用现有 HTTPS 凭据访问同一仓库。不获取、打印或提交凭据。
 
+### Windows SSH 代理兼容
+
+本机曾出现 Windows SSH 代理已有密钥，但 Git 默认 SSH 报 `Permission denied (publickey)` 的情况。先用 Windows 自带的 `ssh-add -l` 检查已加载的公开指纹；若存在密钥，可用 `git -c core.sshCommand=C:/Windows/System32/OpenSSH/ssh.exe ls-remote <SSH仓库地址>` 测试。成功后在本 checkout 配置 `core.sshCommand`，或每次 Git 调用传入该选项。不要改全局配置，不读取私钥内容，不把这类客户端差异误报成用户没上传密钥。
+
 ## 更新流程
 
 1. 检查本地安装的 skill 与仓库现有内容。优先复用可用 checkout；否则在当前任务工作目录克隆。不要依赖过去聊天的临时目录一定存在。
